@@ -14,14 +14,14 @@ import com.example.danp_team01_exam01.views.RegisterScreen
 @Composable
 fun NavigationAppHost(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "login") {
-        composable(Destination.Login.route) { LoginScreen() }
-        composable(Destination.Register.route) { RegisterScreen() }
-        composable(Destination.Home.route) { HomeScreen() }
+        composable(Destination.Login.route) { LoginScreen(navController = navController) }
+        composable(Destination.Register.route) { RegisterScreen(navController = navController) }
+        composable(Destination.Home.route) { HomeScreen(navController = navController) }
         composable(Destination.Details.route) { navBackStackEntry ->
-            val reportId = navBackStackEntry.arguments?.getInt("reportId")
+            val reportId = navBackStackEntry.arguments?.getString("reportId")
 
             if (reportId != null) {
-                DetailsScreen(reportId = reportId)
+                DetailsScreen(navController, reportId = reportId.toInt())
             }
         }
     }

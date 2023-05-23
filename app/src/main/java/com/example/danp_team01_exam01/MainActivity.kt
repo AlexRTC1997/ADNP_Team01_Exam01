@@ -17,6 +17,7 @@ import com.example.danp_team01_exam01.ui.theme.DANP_Team01_Exam01Theme
     2. [NAV02] Create class Destination
     3. [NAV03] Create NavigationAppHost composable
     4. [NAV04] Add NavigationAppHost in MainActivity
+    5. [NAV05] Associate Navigation action to buttons
 */
 
 class MainActivity : ComponentActivity() {
