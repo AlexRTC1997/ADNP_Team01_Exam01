@@ -6,11 +6,18 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.danp_team01_exam01.composables.NavigationAppHost
 import com.example.danp_team01_exam01.ui.theme.DANP_Team01_Exam01Theme
+
+/*
+    [NAVIGATION NOTES]
+    1. [NAV01] Add Android Navigation Dependency in build.gradle(app)
+    2. [NAV02] Create class Destination
+    3. [NAV03] Create NavigationAppHost composable
+    4. [NAV04] Add NavigationAppHost in MainActivity
+*/
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,25 +29,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    val navController = rememberNavController()
+                    NavigationAppHost(navController = navController)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    DANP_Team01_Exam01Theme {
-        Greeting("Android")
     }
 }
