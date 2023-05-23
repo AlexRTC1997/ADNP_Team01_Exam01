@@ -19,6 +19,5 @@ fun BackgroundCircle() {
                 radius = size.minDimension
             )
         }) {
-
     }
 }

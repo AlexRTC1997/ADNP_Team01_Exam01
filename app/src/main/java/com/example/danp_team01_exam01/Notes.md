@@ -12,18 +12,3 @@
 * Secondary Color: #ffffff
 * Tertiary Color: #e8e4ec
 * Black Color: #070707
-
-
-    //    Row(
-//        modifier = Modifier
-//            .fillMaxWidth(),
-//        horizontalArrangement = Arrangement.Center,
-//    ) {
-//        Text(
-//            text = AppName,
-//            color = Color.Red,
-//            fontSize = 24.sp,
-//            fontWeight = FontWeight.Bold
-//        )
-//    }
-
