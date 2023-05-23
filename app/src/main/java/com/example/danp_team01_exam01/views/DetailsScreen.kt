@@ -7,9 +7,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import com.example.danp_team01_exam01.composables.BackgroundCircle
 
 @Composable
 fun DetailsScreen(navController: NavHostController, reportId: Int) {
+    BackgroundCircle()
+
     Column(modifier = Modifier.fillMaxSize()) {
         Text(text = "Details of Report #$reportId")
         Button(onClick = { navController.navigate("home") }) {

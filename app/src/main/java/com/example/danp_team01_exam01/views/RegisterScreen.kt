@@ -8,9 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.example.danp_team01_exam01.classes.Destination
+import com.example.danp_team01_exam01.composables.BackgroundCircle
 
 @Composable
 fun RegisterScreen(navController: NavHostController) {
+    BackgroundCircle()
+
     Column(modifier = Modifier.fillMaxSize()) {
         Text(text = "RegisterScreen")
         Button(onClick = { navController.navigate(Destination.Login.route) }) {
