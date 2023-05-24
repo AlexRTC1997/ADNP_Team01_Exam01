@@ -84,7 +84,7 @@ fun RegisterScreen(navController: NavHostController) {
             modifier = Modifier
                 .clip(RoundedCornerShape(32.dp))
                 .background(SecondaryColor)
-                .padding(28.dp)
+                .padding(28.dp, 28.dp, 28.dp, 16.dp)
                 .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally,
 
@@ -103,7 +103,7 @@ fun RegisterScreen(navController: NavHostController) {
                 value = fullName
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(4.dp))
 
             OutlinedTextField(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -115,7 +115,7 @@ fun RegisterScreen(navController: NavHostController) {
                 value = email
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(4.dp))
 
             OutlinedTextField(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -127,7 +127,7 @@ fun RegisterScreen(navController: NavHostController) {
                 value = password
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(4.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -138,7 +138,7 @@ fun RegisterScreen(navController: NavHostController) {
                 Text(text = "Accept Terms and Conditions", color = BlackColor, fontSize = 14.sp)
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             Button(
                 colors = ButtonDefaults.buttonColors(
