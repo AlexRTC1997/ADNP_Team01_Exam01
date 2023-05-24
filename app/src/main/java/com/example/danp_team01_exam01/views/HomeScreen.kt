@@ -24,6 +24,10 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +39,7 @@ import androidx.navigation.NavHostController
 import com.example.danp_team01_exam01.R
 import com.example.danp_team01_exam01.classes.Destination
 import com.example.danp_team01_exam01.composables.BackgroundCircle
+import com.example.danp_team01_exam01.composables.RegisterReportForm
 import com.example.danp_team01_exam01.composables.ReportCard
 import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
@@ -42,7 +47,10 @@ import com.example.danp_team01_exam01.ui.theme.SecondaryColor
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
+    // Temporal | Simulate a List of reports
     val reportsList = MutableList(10) { it }
+
+    var showDialog by rememberSaveable { mutableStateOf(false) }
 
     BackgroundCircle()
 
@@ -124,10 +132,15 @@ fun HomeScreen(navController: NavHostController) {
         FloatingActionButton(
             containerColor = PrimaryColor,
             contentColor = SecondaryColor,
-            onClick = { },
+            onClick = { showDialog = true },
             shape = RoundedCornerShape(50.dp)
         ) {
             Icon(Icons.Default.Add, contentDescription = "Add")
         }
     }
+
+    RegisterReportForm(showDialog = showDialog, { showDialog = false }, {
+        // Save in DataBase
+        showDialog = false
+    })
 }
