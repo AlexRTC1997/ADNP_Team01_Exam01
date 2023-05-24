@@ -42,7 +42,7 @@ import com.example.danp_team01_exam01.ui.theme.SecondaryColor
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    val reportsList = MutableList(0) { it }
+    val reportsList = MutableList(10) { it }
 
     BackgroundCircle()
 
@@ -79,7 +79,7 @@ fun HomeScreen(navController: NavHostController) {
                 .clip(RoundedCornerShape(32.dp))
                 .fillMaxSize()
                 .background(SecondaryColor)
-                .padding(32.dp),
+                .padding(8.dp, 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
@@ -105,7 +105,7 @@ fun HomeScreen(navController: NavHostController) {
 
             LazyColumn(
                 contentPadding = PaddingValues(all = 4.dp),
-                verticalArrangement = Arrangement.spacedBy(5.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(reportsList) {
                     ReportCard(navController = navController, reportId = it)
