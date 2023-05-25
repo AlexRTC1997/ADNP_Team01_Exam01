@@ -153,7 +153,7 @@ fun DetailsScreen(navController: NavHostController, reportId: Int) {
                         onClick = {
                             // UPDATE REPORT
                             // TODO: Comment or delete next line when UPDATE REPORT is added
-                            navController.navigate(Destination.Home.route)
+                            navController.navigate(Destination.Edit.createRoute(reportId = reportId))
                         }
                     ) {
                         Icon(

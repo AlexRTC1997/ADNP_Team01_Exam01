@@ -24,5 +24,12 @@ fun NavigationAppHost(navController: NavHostController) {
                 DetailsScreen(navController, reportId = reportId.toInt())
             }
         }
+        composable(Destination.Edit.route) { navBackStackEntry ->
+            val reportId = navBackStackEntry.arguments?.getString("reportId")
+
+            if (reportId != null) {
+                EditReportForm(navController, reportId = reportId.toInt())
+            }
+        }
     }
 }
