@@ -2,6 +2,7 @@ package com.example.danp_team01_exam01.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.danp_team01_exam01.R
+import com.example.danp_team01_exam01.classes.Destination
 import com.example.danp_team01_exam01.ui.theme.BlackColor
 
 @Composable
@@ -36,7 +38,8 @@ fun ReportCard(navController: NavHostController, reportId: Int) {
             .clip(RoundedCornerShape(16.dp))
             .background(color = Color(245, 245, 245))
             .padding(12.dp, 8.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable { navController.navigate(Destination.Details.createRoute(reportId = reportId)) },
         verticalAlignment = Alignment.CenterVertically
 //            .shadow(1.dp),
 
