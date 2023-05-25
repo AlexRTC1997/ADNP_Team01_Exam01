@@ -141,6 +141,7 @@ fun HomeScreen(navController: NavHostController) {
 
     RegisterReportForm(showDialog = showDialog, { showDialog = false }, {
         // Save in DataBase
+        // TODO: Comment or delete next function when SAVE IN DATABASE is added
         showDialog = false
     })
 }

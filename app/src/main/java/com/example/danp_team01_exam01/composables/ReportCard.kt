@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -66,19 +66,11 @@ fun ReportCard(navController: NavHostController, reportId: Int) {
 
         Column(modifier = Modifier.fillMaxHeight()) {
             Icon(
-                Icons.Default.Edit,
-                contentDescription = "Add",
+                Icons.Default.KeyboardArrowRight,
+                contentDescription = "Go Details",
                 modifier = Modifier.size(24.dp),
                 tint = BlackColor
             )
         }
-
     }
-
-//    Row(modifier = Modifier
-//        .fillMaxSize()
-//        .height(24.dp)
-//        .clickable { navController.navigate(Destination.Details.createRoute(reportId = reportId)) }) {
-//        Text(text = "Report # $reportId")
-//    }
 }
