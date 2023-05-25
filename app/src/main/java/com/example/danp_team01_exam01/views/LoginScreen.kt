@@ -17,8 +17,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,6 +28,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -42,26 +45,30 @@ import androidx.navigation.NavHostController
 import com.example.danp_team01_exam01.R
 import com.example.danp_team01_exam01.classes.Destination
 import com.example.danp_team01_exam01.composables.BackgroundCircle
-import com.example.danp_team01_exam01.model.User
 import com.example.danp_team01_exam01.ui.theme.AppName
 import com.example.danp_team01_exam01.ui.theme.BlackColor
 import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
 import com.example.danp_team01_exam01.viewModel.MainViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     viewModel: MainViewModel = hiltViewModel(),
     navController: NavHostController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val userExists = viewModel.foundUser.observeAsState().value
 
     BackgroundCircle()
+
+    val scrollState = rememberScrollState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(32.dp, 48.dp),
+            .padding(horizontal = 20.dp)
+            .verticalScroll(scrollState),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
@@ -91,7 +98,7 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
 
             ) {
-            Text(text = "Login", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Login", fontSize = 22.sp, color = PrimaryColor,fontWeight = FontWeight.Bold)
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -130,11 +137,14 @@ fun LoginScreen(
                     containerColor = PrimaryColor
                 ),
                 elevation = ButtonDefaults.buttonElevation(5.dp),
-                modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    navController.navigate(Destination.Home.route) }
-
-
+                    viewModel.loginUser(email, password)
+                    if (userExists != null)
+                        navController.navigate(Destination.Home.route)
+                    else
+                        Log.e("Test", "no existe el usuario")
+                },
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = "Login", color = SecondaryColor, fontSize = 16.sp)
             }

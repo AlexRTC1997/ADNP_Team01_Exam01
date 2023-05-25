@@ -29,13 +29,23 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.danp_team01_exam01.model.Report
+import com.example.danp_team01_exam01.model.User
 import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
+import com.example.danp_team01_exam01.viewModel.MainViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterReportForm(showDialog: Boolean, onDismiss: () -> Unit, onConfirm: () -> Unit) {
+fun RegisterReportForm(
+    viewModel: MainViewModel = hiltViewModel(),
+    showDialog: Boolean, onDismiss: () -> Unit,
+    onConfirm: () -> Unit,
+    userId: String?) {
+
     var title by remember { mutableStateOf("") }
-    var photo by remember { mutableStateOf("") }
+    var img by remember { mutableStateOf("") }
     var district by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
 
@@ -45,7 +55,7 @@ fun RegisterReportForm(showDialog: Boolean, onDismiss: () -> Unit, onConfirm: ()
 //            properties = DialogProperties(usePlatformDefaultWidth = false)
         ) {
             Card(
-//                elevation = 5.dp,
+//              elevation = 1.dp,
                 shape = RoundedCornerShape(15.dp),
                 modifier = Modifier
                     .padding(8.dp)
@@ -82,9 +92,9 @@ fun RegisterReportForm(showDialog: Boolean, onDismiss: () -> Unit, onConfirm: ()
                             label = { Text(text = "Photo: ") },
                             maxLines = 1,
                             modifier = Modifier.fillMaxWidth(),
-                            onValueChange = { photo = it },
+                            onValueChange = { img = it },
                             singleLine = true,
-                            value = photo
+                            value = img
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -121,7 +131,10 @@ fun RegisterReportForm(showDialog: Boolean, onDismiss: () -> Unit, onConfirm: ()
                             ),
                             elevation = ButtonDefaults.buttonElevation(5.dp),
                             modifier = Modifier.fillMaxWidth(),
-                            onClick = { onConfirm() }
+                            onClick = {
+                                viewModel.insertReport(Report(title = title, imageUrl = img, description = description, place = district, reportUserEmail = userId!!))
+                                onConfirm()
+                            }
                         ) {
                             Text(text = "Register", color = SecondaryColor, fontSize = 16.sp)
                         }

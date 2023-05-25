@@ -25,6 +25,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -35,22 +36,32 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.danp_team01_exam01.R
 import com.example.danp_team01_exam01.classes.Destination
 import com.example.danp_team01_exam01.composables.BackgroundCircle
 import com.example.danp_team01_exam01.composables.RegisterReportForm
 import com.example.danp_team01_exam01.composables.ReportCard
+import com.example.danp_team01_exam01.model.Report
+import com.example.danp_team01_exam01.model.User
 import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
+import com.example.danp_team01_exam01.viewModel.MainViewModel
 
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(
+    viewModel: MainViewModel = hiltViewModel(),
+    navController: NavHostController) {
     // Temporal | Simulate a List of reports
-    val reportsList = MutableList(10) { it }
 
     var showDialog by rememberSaveable { mutableStateOf(false) }
+    val userCurrent = viewModel.foundUser.observeAsState().value
+    if (userCurrent != null) {
+        viewModel.userWithReports(userCurrent.userEmail.toString())
+    }
+    val reportsList: List<Report> by viewModel.allReports.observeAsState(initial = listOf())
 
     BackgroundCircle()
 
@@ -116,7 +127,7 @@ fun HomeScreen(navController: NavHostController) {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(reportsList) {
-                    ReportCard(navController = navController, reportId = it)
+                    ReportCard(navController = navController, report = it)
                 }
             }
         }
@@ -139,9 +150,9 @@ fun HomeScreen(navController: NavHostController) {
         }
     }
 
-    RegisterReportForm(showDialog = showDialog, { showDialog = false }, {
-        // Save in DataBase
-        // TODO: Comment or delete next function when SAVE IN DATABASE is added
-        showDialog = false
-    })
+    RegisterReportForm(viewModel = viewModel, showDialog = showDialog, { showDialog = false }, {
+            // Save in DataBase
+            // TODO: Comment or delete next function when SAVE IN DATABASE is added
+            showDialog = false }, "userId = userCurrent.userEmail.toString()")
+
 }

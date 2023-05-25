@@ -29,17 +29,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.danp_team01_exam01.R
 import com.example.danp_team01_exam01.classes.Destination
+import com.example.danp_team01_exam01.model.Report
 import com.example.danp_team01_exam01.ui.theme.BlackColor
 
 @Composable
-fun ReportCard(navController: NavHostController, reportId: Int) {
+fun ReportCard(navController: NavHostController, report: Report) {
     Row(
         modifier = Modifier
             .clip(RoundedCornerShape(16.dp))
             .background(color = Color(245, 245, 245))
             .padding(12.dp, 8.dp)
             .fillMaxWidth()
-            .clickable { navController.navigate(Destination.Details.createRoute(reportId = reportId)) },
+            .clickable { navController.navigate(Destination.Details.createRoute(reportId = report.id)) },
         verticalAlignment = Alignment.CenterVertically
 //            .shadow(1.dp),
 
@@ -58,8 +59,8 @@ fun ReportCard(navController: NavHostController, reportId: Int) {
                 .fillMaxHeight(),
             verticalArrangement = Arrangement.Top
         ) {
-            Text(text = "Report Title", fontWeight = FontWeight.Bold, fontSize = 16.sp)
-            Text(text = "This is a simple description of the registered report", fontSize = 14.sp)
+            Text(text = report.title, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            Text(text = report.place, fontSize = 14.sp)
         }
 
         Spacer(modifier = Modifier.width(8.dp))

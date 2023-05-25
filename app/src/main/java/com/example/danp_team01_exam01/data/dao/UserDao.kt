@@ -11,5 +11,5 @@ interface UserDao {
     suspend fun registerUser(user: User)
 
     @Query("SELECT * FROM user WHERE user_email = :email AND user_password = :password")
-    suspend fun loginUser(email: String, password: String): User
+    fun loginUser(email: String, password: String): User
 }

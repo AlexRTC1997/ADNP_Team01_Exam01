@@ -1,5 +1,6 @@
 package com.example.danp_team01_exam01.data.repository
 
+import androidx.lifecycle.MutableLiveData
 import com.example.danp_team01_exam01.data.ReportDao
 import com.example.danp_team01_exam01.data.dao.UserDao
 import com.example.danp_team01_exam01.data.dao.UserWithReportsDao
@@ -15,6 +16,8 @@ class AppRepository(
     private val userWithReportsDao: UserWithReportsDao
     ) {
 
+    val foundUser = MutableLiveData<User>()
+    val allReports = MutableLiveData<List<Report>>()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     fun registerUser(user: User) {
@@ -23,9 +26,15 @@ class AppRepository(
         }
     }
 
+    fun insertReport(report: Report) {
+        coroutineScope.launch(Dispatchers.IO) {
+            reportDao.insertReport(report)
+        }
+    }
+
     fun loginUser(email: String, password: String) {
         coroutineScope.launch(Dispatchers.IO) {
-            userDao.loginUser(email, password)
+            foundUser.postValue(userDao.loginUser(email, password))
         }
     }
 
@@ -43,7 +52,7 @@ class AppRepository(
 
     fun getUserWithReport(userEmail: String) {
         coroutineScope.launch(Dispatchers.IO) {
-            userWithReportsDao.getUserWithReport(userEmail)
+            allReports.postValue(userWithReportsDao.getUserWithReport(userEmail))
         }
     }
 }

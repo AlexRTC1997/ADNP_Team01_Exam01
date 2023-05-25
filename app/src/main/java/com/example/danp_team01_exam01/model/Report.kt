@@ -12,8 +12,8 @@ data class Report(
     val id: Int = 1,
     @ColumnInfo(name = "report_title")
     val title: String,
-    @ColumnInfo(name = "report_image", typeAffinity = ColumnInfo.BLOB)
-    val image: ByteArray,
+    @ColumnInfo(name = "report_image")
+    val imageUrl: String,
     @ColumnInfo(name = "report_place")
     val place: String,
     @ColumnInfo(name = "report_description")

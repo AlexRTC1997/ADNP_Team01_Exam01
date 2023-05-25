@@ -16,8 +16,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -26,6 +28,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -57,15 +60,16 @@ fun RegisterScreen(
     var fullName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-
     var isChecked by remember { mutableStateOf(false) }
 
     BackgroundCircle()
 
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(32.dp, 48.dp),
+            .padding(horizontal = 20.dp)
+            .verticalScroll(scrollState),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
@@ -95,7 +99,7 @@ fun RegisterScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
 
             ) {
-            Text(text = "Register", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Register", fontSize = 22.sp, color = PrimaryColor, fontWeight = FontWeight.Bold)
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -154,7 +158,7 @@ fun RegisterScreen(
                 elevation = ButtonDefaults.buttonElevation(5.dp),
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    viewModel.registerUser(User(email, fullName,password))
+                    viewModel.registerUser(User(email, fullName, password))
                     navController.navigate(Destination.Login.route)
                 }
             ) {
