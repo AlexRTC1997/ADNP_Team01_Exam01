@@ -37,17 +37,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.danp_team01_exam01.R
 import com.example.danp_team01_exam01.classes.Destination
 import com.example.danp_team01_exam01.composables.BackgroundCircle
+import com.example.danp_team01_exam01.model.User
 import com.example.danp_team01_exam01.ui.theme.AppName
 import com.example.danp_team01_exam01.ui.theme.BlackColor
 import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
+import com.example.danp_team01_exam01.viewModel.MainViewModel
 
 @Composable
-fun RegisterScreen(navController: NavHostController) {
+fun RegisterScreen(
+    viewModel: MainViewModel = hiltViewModel(),
+    navController: NavHostController
+) {
     var fullName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -147,7 +153,10 @@ fun RegisterScreen(navController: NavHostController) {
                 ),
                 elevation = ButtonDefaults.buttonElevation(5.dp),
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { navController.navigate(Destination.Login.route) }
+                onClick = {
+                    viewModel.registerUser(User(email, fullName,password))
+                    navController.navigate(Destination.Login.route)
+                }
             ) {
                 Text(text = "Register", color = SecondaryColor, fontSize = 16.sp)
             }
