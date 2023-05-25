@@ -1,4 +1,4 @@
-package com.example.danp_team01_exam01
+package com.example.danp_team01_exam01.views
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.danp_team01_exam01.composables.NavigationAppHost
 import com.example.danp_team01_exam01.ui.theme.DANP_Team01_Exam01Theme
 import com.example.danp_team01_exam01.ui.theme.TertiaryColor
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

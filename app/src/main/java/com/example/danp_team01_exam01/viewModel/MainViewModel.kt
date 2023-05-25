@@ -8,19 +8,12 @@ import com.example.danp_team01_exam01.data.repository.AppRepository
 import com.example.danp_team01_exam01.model.Report
 import com.example.danp_team01_exam01.model.User
 import com.example.danp_team01_exam01.model.UserWithReports
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel(application: Application) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: AppRepository) : ViewModel() {
 
-    private val repository: AppRepository
-
-    init {
-        val appDatabase = AppDatabase.getInstance(application)
-        val userDao = appDatabase.userDao()
-        val reportsDao = appDatabase.reportDao()
-        val userWithReportsDao = appDatabase.userWithReportsDao()
-
-        repository = AppRepository(userDao, reportsDao, userWithReportsDao)
-    }
 
     fun registerUser(user: User) {
         repository.registerUser(user)
