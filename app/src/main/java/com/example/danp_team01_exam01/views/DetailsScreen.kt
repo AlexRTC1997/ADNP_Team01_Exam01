@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
@@ -37,6 +38,8 @@ import androidx.navigation.NavHostController
 import com.example.danp_team01_exam01.R
 import com.example.danp_team01_exam01.classes.Destination
 import com.example.danp_team01_exam01.composables.BackgroundCircle
+import com.example.danp_team01_exam01.model.Report
+import com.example.danp_team01_exam01.ui.theme.ErrorColor
 import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
 import com.example.danp_team01_exam01.viewModel.MainViewModel
@@ -181,7 +184,7 @@ fun DetailsScreen(
 
                         Spacer(modifier = Modifier.width(8.dp))
 
-                        /*Button(
+                        Button(
                             colors = ButtonDefaults.buttonColors(
                                 contentColor = SecondaryColor,
                                 containerColor = ErrorColor
@@ -189,6 +192,7 @@ fun DetailsScreen(
                             elevation = ButtonDefaults.buttonElevation(5.dp),
                             modifier = Modifier.weight(1f),
                             onClick = {
+                                viewModel.deleteReport(Report(parseInt(reportId)))
                                 navController.popBackStack() }
                         ) {
                             Icon(
@@ -198,7 +202,7 @@ fun DetailsScreen(
                             )
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(text = "Delete", color = SecondaryColor, fontSize = 16.sp)
-                        }*/
+                        }
                     }
                 }
             }

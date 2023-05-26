@@ -42,5 +42,9 @@ class Report {
         this.description = description
         this.reportUserEmail = reportUserEmail
     }
+    @Ignore
+    constructor(id: Int) {
+        this.id = id
+    }
 
 }
