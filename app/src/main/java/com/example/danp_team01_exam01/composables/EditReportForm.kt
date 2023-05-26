@@ -58,7 +58,7 @@ fun EditReportForm(
     val reportSelected = viewModel.foundReport.observeAsState().value!!
 
     var title by remember { mutableStateOf("${reportSelected.title}") }
-    var img by remember { mutableStateOf("${reportSelected.imageUrl}") }
+    //var img by remember { mutableStateOf("${reportSelected.imageUrl}") }
     var district by remember { mutableStateOf("${reportSelected.place}") }
     var description by remember { mutableStateOf("${reportSelected.description}") }
 
@@ -82,7 +82,7 @@ fun EditReportForm(
                 tint = SecondaryColor,
                 modifier = Modifier
                     .size(24.dp)
-                    .clickable { navController.navigate(Destination.Home.route) }
+                    .clickable { navController.popBackStack() }
             )
 
             Spacer(modifier = Modifier.width(4.dp))
@@ -132,7 +132,7 @@ fun EditReportForm(
                 Column {
                     OutlinedTextField(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                        label = { Text(text = "Title: ${reportSelected.title}") },
+                        label = { Text(text = "Title") },
                         maxLines = 1,
                         modifier = Modifier.fillMaxWidth(),
                         onValueChange = { title = it },
@@ -140,9 +140,9 @@ fun EditReportForm(
                         value = title
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                   /* Spacer(modifier = Modifier.height(8.dp))
 
-                    // TODO: Change Input to Image Input ?
+
                     OutlinedTextField(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                         label = { Text(text = "Photo: ") },
@@ -151,13 +151,13 @@ fun EditReportForm(
                         onValueChange = { img = it },
                         singleLine = true,
                         value = img
-                    )
+                    )*/
 
                     Spacer(modifier = Modifier.height(8.dp))
 
                     OutlinedTextField(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                        label = { Text(text = "District: ${reportSelected.place}")},
+                        label = { Text(text = "District")},
                         maxLines = 1,
                         modifier = Modifier.fillMaxWidth(),
                         onValueChange = { district = it },
@@ -170,7 +170,7 @@ fun EditReportForm(
                     // TODO: Change to TextArea
                     OutlinedTextField(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                        label = { Text(text = "Description: ${reportSelected.description}") },
+                        label = { Text(text = "Description") },
                         maxLines = 1,
                         modifier = Modifier.fillMaxWidth(),
                         onValueChange = { description = it },
@@ -191,7 +191,7 @@ fun EditReportForm(
                             viewModel.updateReport(Report(
                                 id = reportSelected.id,
                                 title = title,
-                                imageUrl = img,
+                                imageUrl = reportSelected.imageUrl,
                                 place = district,
                                 description = description,
                                 reportUserEmail = reportSelected.reportUserEmail

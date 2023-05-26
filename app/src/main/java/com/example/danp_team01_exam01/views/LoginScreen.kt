@@ -37,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -120,6 +121,7 @@ fun LoginScreen(
                 modifier = Modifier.fillMaxWidth(),
                 onValueChange = { password = it },
                 singleLine = true,
+                visualTransformation = PasswordVisualTransformation(),
                 value = password
             )
 

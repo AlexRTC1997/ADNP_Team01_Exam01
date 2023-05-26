@@ -8,7 +8,7 @@ import com.example.danp_team01_exam01.model.User
 
 @Dao
 interface UserDao {
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun registerUser(user: User)
 
     @Query("SELECT * FROM user WHERE user_email = :email")
