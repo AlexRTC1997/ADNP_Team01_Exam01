@@ -2,7 +2,6 @@
 
 package com.example.danp_team01_exam01.views
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -125,9 +124,11 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
+            /*
             Text(text = "Forgot your password?", color = PrimaryColor, fontSize = 14.sp)
 
             Spacer(modifier = Modifier.height(24.dp))
+            */
 
             // [NAV05]
             Button(
@@ -138,18 +139,18 @@ fun LoginScreen(
                 elevation = ButtonDefaults.buttonElevation(5.dp),
                 onClick = {
                     viewModel.loginUser(email, password)
-
                     if (userExists != null) {
                         navController.navigate(
                             Destination.Home.routeWithArgs(
                                 userExists.userEmail
                             )
                         )
-                    } else
-                        Log.e("Test", "no existe el usuario")
+                    } //else
+                        //Toast.makeText(this, "User don't exist", Toast.LENGTH_SHORT).show()
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
+
                 Text(text = "Login", color = SecondaryColor, fontSize = 16.sp)
             }
 

@@ -34,18 +34,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.danp_team01_exam01.model.Report
 import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
 import com.example.danp_team01_exam01.viewModel.MainViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,7 +49,6 @@ fun RegisterReportForm(
     userId: String?) {
 
     var title by remember { mutableStateOf("") }
-    //var img by remember { mutableStateOf("") }
     var district by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
 
@@ -101,8 +93,6 @@ fun RegisterReportForm(
                             if (imageUri != null) {
                                 text = "Great!"
                             }
-                            else
-                                text = ""
 
                             Spacer(modifier = Modifier.width(20.dp))
 

@@ -1,10 +1,5 @@
 package com.example.danp_team01_exam01.views
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,7 +16,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
@@ -30,17 +24,11 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -49,12 +37,9 @@ import androidx.navigation.NavHostController
 import com.example.danp_team01_exam01.R
 import com.example.danp_team01_exam01.classes.Destination
 import com.example.danp_team01_exam01.composables.BackgroundCircle
-import com.example.danp_team01_exam01.model.Report
-import com.example.danp_team01_exam01.ui.theme.ErrorColor
 import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
 import com.example.danp_team01_exam01.viewModel.MainViewModel
-import java.io.IOException
 import java.lang.Integer.parseInt
 
 @Composable
@@ -196,7 +181,7 @@ fun DetailsScreen(
 
                         Spacer(modifier = Modifier.width(8.dp))
 
-                        Button(
+                        /*Button(
                             colors = ButtonDefaults.buttonColors(
                                 contentColor = SecondaryColor,
                                 containerColor = ErrorColor
@@ -213,7 +198,7 @@ fun DetailsScreen(
                             )
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(text = "Delete", color = SecondaryColor, fontSize = 16.sp)
-                        }
+                        }*/
                     }
                 }
             }
