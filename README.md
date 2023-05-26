@@ -8,17 +8,21 @@
 
 ## App Demo
 
-- **Login**
-
-![Login](https://github.com/AlexRTC1997/ADNP_Team01_Exam01/assets/64320646/d66ee695-8083-471f-bc6b-788342c18574)
-
 - **Register**
 
 ![Register](https://github.com/AlexRTC1997/ADNP_Team01_Exam01/assets/64320646/8bc1c2b7-ad25-4532-9c22-8b31128c54e0)
 
+- **Login**
+
+![Login](https://github.com/AlexRTC1997/ADNP_Team01_Exam01/assets/64320646/d66ee695-8083-471f-bc6b-788342c18574)
+
 - **Home**
 
 ![Home](https://github.com/AlexRTC1997/ADNP_Team01_Exam01/assets/64320646/0220d596-73cc-4dd4-8352-9f67ecfc53a0)
+
+- **Add Report**
+
+![Add_Report](https://github.com/AlexRTC1997/ADNP_Team01_Exam01/assets/64320646/66880f9a-662e-4146-ba2b-c553521429b6)
 
 - **Details**
 
