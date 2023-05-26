@@ -22,7 +22,7 @@
 
 - **Details**
 
-![Details](https://github.com/AlexRTC1997/ADNP_Team01_Exam01/assets/64320646/1aa83bf3-c719-4d03-9742-071eae6c77c8)
+![Details](https://github.com/AlexRTC1997/ADNP_Team01_Exam01/assets/64320646/f794a244-440b-4db0-b44a-487370e3dba5)
 
 - **Edit**
 
