@@ -6,10 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.danp_team01_exam01.composables.NavigationAppHost
 import com.example.danp_team01_exam01.ui.theme.DANP_Team01_Exam01Theme
 import com.example.danp_team01_exam01.ui.theme.TertiaryColor
+import com.example.danp_team01_exam01.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +26,8 @@ class MainActivity : ComponentActivity() {
                     color = TertiaryColor,
                 ) {
                     val navController = rememberNavController()
-                    NavigationAppHost(navController = navController)
+                    val viewModel: MainViewModel = hiltViewModel()
+                    NavigationAppHost(viewModel = viewModel, navController = navController)
                 }
             }
         }

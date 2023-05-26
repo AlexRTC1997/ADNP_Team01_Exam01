@@ -28,6 +28,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -40,15 +41,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.danp_team01_exam01.classes.Destination
+import com.example.danp_team01_exam01.model.Report
 import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
+import com.example.danp_team01_exam01.viewModel.MainViewModel
+import java.lang.Integer.parseInt
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditReportForm(navController: NavHostController, reportId: Int) {
-    var title by remember { mutableStateOf("") }
-    var photo by remember { mutableStateOf("") }
-    var district by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
+fun EditReportForm(
+    viewModel: MainViewModel,
+    navController: NavHostController,
+    reportId: String?) {
+
+    viewModel.getReport(parseInt(reportId!!))
+    val reportSelected = viewModel.foundReport.observeAsState().value!!
+
+    var title by remember { mutableStateOf("${reportSelected.title}") }
+    var img by remember { mutableStateOf("${reportSelected.imageUrl}") }
+    var district by remember { mutableStateOf("${reportSelected.place}") }
+    var description by remember { mutableStateOf("${reportSelected.description}") }
 
     BackgroundCircle()
 
@@ -78,7 +90,7 @@ fun EditReportForm(navController: NavHostController, reportId: Int) {
             Text(
                 fontSize = 24.sp,
                 color = SecondaryColor,
-                text = "Welcome @User",
+                text = "Welcome ${reportSelected.reportUserEmail}",
                 modifier = Modifier.weight(1f)
             )
 
@@ -120,7 +132,7 @@ fun EditReportForm(navController: NavHostController, reportId: Int) {
                 Column {
                     OutlinedTextField(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                        label = { Text(text = "Title: ") },
+                        label = { Text(text = "Title: ${reportSelected.title}") },
                         maxLines = 1,
                         modifier = Modifier.fillMaxWidth(),
                         onValueChange = { title = it },
@@ -136,16 +148,16 @@ fun EditReportForm(navController: NavHostController, reportId: Int) {
                         label = { Text(text = "Photo: ") },
                         maxLines = 1,
                         modifier = Modifier.fillMaxWidth(),
-                        onValueChange = { photo = it },
+                        onValueChange = { img = it },
                         singleLine = true,
-                        value = photo
+                        value = img
                     )
 
                     Spacer(modifier = Modifier.height(8.dp))
 
                     OutlinedTextField(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                        label = { Text(text = "District: ") },
+                        label = { Text(text = "District: ${reportSelected.place}")},
                         maxLines = 1,
                         modifier = Modifier.fillMaxWidth(),
                         onValueChange = { district = it },
@@ -158,7 +170,7 @@ fun EditReportForm(navController: NavHostController, reportId: Int) {
                     // TODO: Change to TextArea
                     OutlinedTextField(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                        label = { Text(text = "Description: ") },
+                        label = { Text(text = "Description: ${reportSelected.description}") },
                         maxLines = 1,
                         modifier = Modifier.fillMaxWidth(),
                         onValueChange = { description = it },
@@ -175,7 +187,17 @@ fun EditReportForm(navController: NavHostController, reportId: Int) {
                         ),
                         elevation = ButtonDefaults.buttonElevation(5.dp),
                         modifier = Modifier.fillMaxWidth(),
-                        onClick = { navController.navigate(Destination.Details.createRoute(reportId = reportId)) }
+                        onClick = {
+                            viewModel.updateReport(Report(
+                                id = reportSelected.id,
+                                title = title,
+                                imageUrl = img,
+                                place = district,
+                                description = description,
+                                reportUserEmail = reportSelected.reportUserEmail
+                            ))
+                            navController.popBackStack()
+                        }
                     ) {
                         Text(text = "Save", color = SecondaryColor, fontSize = 16.sp)
                     }

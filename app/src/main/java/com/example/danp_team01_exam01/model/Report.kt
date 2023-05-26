@@ -2,22 +2,45 @@ package com.example.danp_team01_exam01.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
-
 @Entity(tableName = "report")
-data class Report(
+class Report {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "report_id")
-    val id: Int = 1,
+    var id: Int = 0
+
     @ColumnInfo(name = "report_title")
-    val title: String,
+    var title: String = ""
+
     @ColumnInfo(name = "report_image")
-    val imageUrl: String,
+    var imageUrl: String = ""
+
     @ColumnInfo(name = "report_place")
-    val place: String,
+    var place: String = ""
+
     @ColumnInfo(name = "report_description")
-    val description: String,
+    var description: String = ""
+
     @ColumnInfo(name = "report_userEmail")
-    val reportUserEmail: String
-    )
+    var reportUserEmail: String = ""
+
+    constructor(id: Int, title: String, imageUrl: String, place: String, description: String, reportUserEmail: String) {
+        this.id = id
+        this.title = title
+        this.imageUrl = imageUrl
+        this.place = place
+        this.description = description
+        this.reportUserEmail = reportUserEmail
+    }
+    @Ignore
+    constructor(title: String, imageUrl: String, place: String, description: String, reportUserEmail: String) {
+        this.title = title
+        this.imageUrl = imageUrl
+        this.place = place
+        this.description = description
+        this.reportUserEmail = reportUserEmail
+    }
+
+}

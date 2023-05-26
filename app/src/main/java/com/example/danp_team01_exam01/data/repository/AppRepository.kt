@@ -17,7 +17,9 @@ class AppRepository(
     ) {
 
     val foundUser = MutableLiveData<User>()
+    val foundReport = MutableLiveData<Report>()
     val allReports = MutableLiveData<List<Report>>()
+
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     fun registerUser(user: User) {
@@ -38,9 +40,21 @@ class AppRepository(
         }
     }
 
+    fun getUser(email: String) {
+        coroutineScope.launch(Dispatchers.IO) {
+            foundUser.postValue(userDao.getUser(email))
+        }
+    }
+
     fun getReport(id: Int) {
         coroutineScope.launch(Dispatchers.IO) {
-            reportDao.getReport(id)
+            foundReport.postValue(reportDao.getReport(id))
+        }
+    }
+
+    fun updateReport(report: Report) {
+        coroutineScope.launch(Dispatchers.IO) {
+            reportDao.updateReport(report)
         }
     }
 

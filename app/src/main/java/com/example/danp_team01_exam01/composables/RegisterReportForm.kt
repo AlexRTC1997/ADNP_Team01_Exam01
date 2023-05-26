@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.danp_team01_exam01.model.Report
-import com.example.danp_team01_exam01.model.User
 import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
 import com.example.danp_team01_exam01.viewModel.MainViewModel
@@ -132,7 +131,7 @@ fun RegisterReportForm(
                             elevation = ButtonDefaults.buttonElevation(5.dp),
                             modifier = Modifier.fillMaxWidth(),
                             onClick = {
-                                viewModel.insertReport(Report(title = title, imageUrl = img, description = description, place = district, reportUserEmail = userId!!))
+                                viewModel.insertReport(Report( title = title, imageUrl = img, description = description, place = district, reportUserEmail = userId!!))
                                 onConfirm()
                             }
                         ) {

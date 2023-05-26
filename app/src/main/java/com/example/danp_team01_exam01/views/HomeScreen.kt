@@ -14,16 +14,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -32,19 +35,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.danp_team01_exam01.R
 import com.example.danp_team01_exam01.classes.Destination
 import com.example.danp_team01_exam01.composables.BackgroundCircle
 import com.example.danp_team01_exam01.composables.RegisterReportForm
-import com.example.danp_team01_exam01.composables.ReportCard
 import com.example.danp_team01_exam01.model.Report
-import com.example.danp_team01_exam01.model.User
+import com.example.danp_team01_exam01.ui.theme.BlackColor
 import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
 import com.example.danp_team01_exam01.viewModel.MainViewModel
@@ -52,14 +54,13 @@ import com.example.danp_team01_exam01.viewModel.MainViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: MainViewModel = hiltViewModel(),
-    navController: NavHostController) {
-    // Temporal | Simulate a List of reports
+    viewModel: MainViewModel,
+    navController: NavHostController,
+    userEmail: String?) {
 
     var showDialog by rememberSaveable { mutableStateOf(false) }
-    val userCurrent = viewModel.foundUser.observeAsState().value
-    if (userCurrent != null) {
-        viewModel.userWithReports(userCurrent.userEmail.toString())
+    LaunchedEffect(Unit){
+        viewModel.userWithReports(userEmail!!)
     }
     val reportsList: List<Report> by viewModel.allReports.observeAsState(initial = listOf())
 
@@ -79,7 +80,7 @@ fun HomeScreen(
             Text(
                 fontSize = 24.sp,
                 color = SecondaryColor,
-                text = "Welcome @User",
+                text = "Welcome $userEmail",
                 modifier = Modifier.weight(1f)
             )
 
@@ -127,7 +128,7 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(reportsList) {
-                    ReportCard(navController = navController, report = it)
+                    ReportCard(report = it, navController = navController)
                 }
             }
         }
@@ -153,6 +154,64 @@ fun HomeScreen(
     RegisterReportForm(viewModel = viewModel, showDialog = showDialog, { showDialog = false }, {
             // Save in DataBase
             // TODO: Comment or delete next function when SAVE IN DATABASE is added
-            showDialog = false }, "userId = userCurrent.userEmail.toString()")
+            showDialog = false }, userEmail)
 
+}
+
+@Composable
+fun ReportCard( report : Report, navController: NavHostController) {
+    Row(
+        modifier = Modifier
+            .clip(RoundedCornerShape(16.dp))
+            .background(color = Color(245, 245, 245))
+            .padding(12.dp, 8.dp)
+            .fillMaxWidth()
+            .clickable {
+                navController.navigate(
+                    Destination.Details.routeWithArgs(
+                        report.id.toString()
+                    )
+                ) },
+        verticalAlignment = Alignment.CenterVertically
+//            .shadow(1.dp),
+
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.trash),
+            contentDescription = "Trash",
+            modifier = Modifier.size(50.dp)
+        )
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight(),
+            verticalArrangement = Arrangement.Top
+        ) {
+            Text(
+                text = report.title,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                color = PrimaryColor
+            )
+            Text(
+                text = report.place,
+                fontSize = 14.sp,
+                color = PrimaryColor
+            )
+        }
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Column(modifier = Modifier.fillMaxHeight()) {
+            Icon(
+                Icons.Default.KeyboardArrowRight,
+                contentDescription = "Go Details",
+                modifier = Modifier.size(24.dp),
+                tint = BlackColor
+            )
+        }
+    }
 }
