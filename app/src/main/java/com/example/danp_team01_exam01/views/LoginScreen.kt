@@ -54,6 +54,7 @@ import com.example.danp_team01_exam01.viewModel.MainViewModel
 fun LoginScreen(
     viewModel: MainViewModel,
     navController: NavHostController) {
+
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val userExists = viewModel.foundUser.observeAsState().value
@@ -138,15 +139,16 @@ fun LoginScreen(
                 ),
                 elevation = ButtonDefaults.buttonElevation(5.dp),
                 onClick = {
-                    viewModel.loginUser(email, password)
-                    if (userExists != null) {
-                        navController.navigate(
-                            Destination.Home.routeWithArgs(
-                                userExists.userEmail
+                    if (email.isNotEmpty() && password.isNotEmpty()){
+                        viewModel.loginUser(email, password)
+                        if (userExists != null) {
+                            navController.navigate(
+                                Destination.Home.routeWithArgs(
+                                    userExists.userEmail
+                                )
                             )
-                        )
-                    } //else
-                        //Toast.makeText(this, "User don't exist", Toast.LENGTH_SHORT).show()
+                        } //else
+                    } //Toast.makeText(this, "User don't exist", Toast.LENGTH_SHORT).show()
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {

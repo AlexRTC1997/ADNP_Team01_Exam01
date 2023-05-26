@@ -146,8 +146,19 @@ fun RegisterReportForm(
                             elevation = ButtonDefaults.buttonElevation(5.dp),
                             modifier = Modifier.fillMaxWidth(),
                             onClick = {
-                                viewModel.insertReport(Report( title = title, imageUrl = imageUri.toString(), description = description, place = district, reportUserEmail = userId!!))
-                                onConfirm()
+                                if (title.isNotEmpty() && imageUri.toString().isNotEmpty() &&
+                                        description.isNotEmpty() && district.isNotEmpty() && userId!!.isNotEmpty()) {
+                                    viewModel.insertReport(
+                                        Report(
+                                            title = title,
+                                            imageUrl = imageUri.toString(),
+                                            description = description,
+                                            place = district,
+                                            reportUserEmail = userId
+                                        )
+                                    )
+                                    onConfirm()
+                                }
                             }
                         ) {
                             Text(text = "Register", color = SecondaryColor, fontSize = 16.sp)

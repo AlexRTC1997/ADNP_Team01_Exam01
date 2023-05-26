@@ -144,14 +144,14 @@ fun DetailsScreen(
                         Spacer(modifier = Modifier.height(18.dp))
 
                         Text(
-                            text = reportSelected.place,
+                            text = "District: ${reportSelected.place}",
                             color = PrimaryColor
                         )
 
                         Spacer(modifier = Modifier.height(12.dp))
 
                         Text(
-                            text = reportSelected.description,
+                            text = "Description: ${reportSelected.description}",
                             color = PrimaryColor
                         )
                     }

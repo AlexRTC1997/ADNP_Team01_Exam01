@@ -50,6 +50,7 @@ import com.example.danp_team01_exam01.ui.theme.PrimaryColor
 import com.example.danp_team01_exam01.ui.theme.SecondaryColor
 import com.example.danp_team01_exam01.viewModel.MainViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreen(
     viewModel: MainViewModel,
@@ -156,8 +157,10 @@ fun RegisterScreen(
                 elevation = ButtonDefaults.buttonElevation(5.dp),
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
+                    if (email.isNotEmpty() && fullName.isNotEmpty() && password.isNotEmpty()){
                     viewModel.registerUser(User(email, fullName, password))
                     navController.navigate(Destination.Login.route)
+                    }
                 }
             ) {
                 Text(text = "Register", color = SecondaryColor, fontSize = 16.sp)
