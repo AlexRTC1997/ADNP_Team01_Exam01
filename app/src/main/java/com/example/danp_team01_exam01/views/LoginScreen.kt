@@ -138,8 +138,8 @@ fun LoginScreen(
                 elevation = ButtonDefaults.buttonElevation(5.dp),
                 onClick = {
                     viewModel.loginUser(email, password)
+
                     if (userExists != null) {
-                        //navController.navigate(Destination.Home.route + "/" + userExists!!.userEmail)
                         navController.navigate(
                             Destination.Home.routeWithArgs(
                                 userExists.userEmail
